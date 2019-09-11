@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DepartmentMapper">
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="departmentMap" type="study.model1.mybatis.model.Department">
+        <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+        <result property="deptno" column="deptno" />
+        <result property="dname" column="dname" />
+        <result property="loc" column="loc" />
+    </resultMap>
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem" 
+            parameterType="study.model1.mybatis.model.Department" 
+            resultMap="departmentMap">
+        <!-- "#{변수명}" 으로 표시된 곳에 멤버변수가 치환된다. -->
+        select deptno,dname,loc from department where deptno =#{deptno};
+    </select>
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList" 
+            parameterType="study.model1.mybatis.model.Department" 
+            resultMap="departmentMap">
+        <!-- 이 안에서 처리할 SQL문을 명시한다. -->
+        select deptno,dname,loc from department
+        <where>
+        	<if test="dname != null and dname != ''">
+        		dname like concat('%',#{dname},'%')
+        	</if>
+        	<if test="loc != null and loc != ''">
+        		or loc like concat('%',#{loc},'%')
+        	</if>
+        </where>
+        order by deptno desc
+        <if test="listCount >0">
+        	limit #{offset},#{listCount}
+        </if>
+    </select>
+    
+    <!-- 데이터 수 조회를 위한 기능 정의 , result 값이 int 형으로 나오므로 resultType = int 선언  -->
+    <select id="selectCount" 
+            parameterType="study.model1.mybatis.model.Department" 
+            resultType="int">
+        <!-- 이 안에서 처리할 SQL문을 명시한다. -->
+        SELECT COUNT(*) FROM department
+        <where>
+        	<if test="dname != null and dname != ''">
+        		dname like concat('%',#{dname},'%')
+        	</if>
+        	<if test="loc != null and loc != ''">
+        		or loc like concat('%',#{loc},'%')
+        	</if>
+        </where>
+    </select>
+    
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem" 
+            parameterType="study.model1.mybatis.model.Department" 
+            useGeneratedKeys="true"
+            keyProperty="deptno">
+        <!-- "#{변수명}" 으로 표시된 곳에 Beans의 멤버변수가 치환된다. -->
+        insert into department(dname,loc) values (#{dname},#{loc});
+    </insert>
+    
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem" parameterType="study.model1.mybatis.model.Department">
+        <!-- 이 안에서 처리할 SQL문을 명시한다. -->
+        delete from department where deptno =#{deptno};
+    </delete>
+    
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem" parameterType="study.model1.mybatis.model.Department">
+        <!-- 이 안에서 처리할 SQL문을 명시한다. -->
+        update department set dname =#{dname},loc=#{loc} where deptno = #{deptno};
+    </update>
+</mapper>

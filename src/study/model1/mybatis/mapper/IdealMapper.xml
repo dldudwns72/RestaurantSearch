@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IdealMapper">
+    <!-- Beans 클래스의 객체이름(restNo)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="idealMap" type="study.model1.mybatis.model.Ideal">
+        <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+     
+        <result property="num" column="num" />
+        <result property="name" column="name" />
+        <result property="win" column="win" />
+        <result property="lose" column="lose" />
+        
+        <result property="userNo" column="userNo" />
+        <result property="gamecount" column="gamecount" />
+        <result property="g1" column="g1" />
+        <result property="g2" column="g2" />
+        <result property="g3" column="g3" />
+        <result property="g4" column="g4" />
+        <result property="g5" column="g5" />
+        <result property="g6" column="g6" />
+        <result property="g7" column="g7" />
+        <result property="g8" column="g8" />
+        <result property="g9" column="g9" />        
+        <result property="g10" column="g10" />
+        <result property="g11" column="g11" />
+        <result property="g12" column="g12" />
+        <result property="g13" column="g13" />
+        <result property="g14" column="g14" />
+        <result property="g15" column="g15" />
+        
+    </resultMap>
+    
+    <!--★★★★★이상형 월드컵★★★★★--> 
+    
+      <select id="list" 
+            parameterType="study.model1.mybatis.model.Ideal"
+            resultMap="idealMap">
+        <!-- 리스트 보여줌 -->
+        select num, name, win, lose from ideal order by num asc
+    </select>
+    
+        
+    <update id="count" parameterType="study.model1.mybatis.model.Ideal">
+          <!-- 새로운 게임을 생성하고 게임 숫자의 카운트를+1 해줌 where id=userNo -->
+          <!-- query1 = "update member set gamecount=gamecount+1 where id='"+session.getAttribute("id")+"'"; -->
+          update ideal set gamecount = #{gamecount} where userNo = #{userNo}
+	</update>
+    
+    <update id="win" parameterType="study.model1.mybatis.model.Ideal">
+        <!-- 이긴 음식에 카운트 +1 을 해줌 where num -->
+        <!-- query2 = "update person set win=win+1 where num="+who1; -->
+		update ideal set win=#{win} where num=#{num}
+	</update>
+    
+     <update id="lose" parameterType="study.model1.mybatis.model.Ideal">
+        <!-- 진 음식에 카운트 +1을 해줌 -->
+		<!-- query3 = "update person set lose=lose+1 where num="+who2; -->
+		update ideal set lose=#{lose} where num=#{num}
+	 </update>
+    
+     <update id="temp" parameterType="study.model1.mybatis.model.Ideal">
+        <!-- user에 gamecount + 1을 해줌 -->     
+		<!-- query4 = "update member set g"+String.valueOf(Integer.parseInt(gamecount)+1)+"="+String.valueOf(temp)+ " where id='"+session.getAttribute("id")+"'"; -->
+		update ideal set gamecount=#{gamecount+1} where userNo=#{userNo}
+     </update>
+     
+</mapper>
