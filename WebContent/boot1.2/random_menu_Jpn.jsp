@@ -53,7 +53,7 @@
 		Restaurants.Items.setOffset(pageData.getOffset());
 		Restaurants.Items.setListCount(pageData.getListCount());
 		
-		output = RestaurantService.getRestaurantList_Kor(input); 
+		output = RestaurantService.getRestaurantList_Jpn(input); 
 		
 	}catch(Exception e){
 		sqlSession.close();
@@ -64,7 +64,7 @@
 	
 	  //db에서 찾을 키워드 리스트 String 값으로 입력.
 	  
-	   String[] randomMenu = {"불고기", "김치찌개", "순두부", "뼈해장국" ,"김치볶음밥", ""};
+	   String[] randomMenu = {"불고기", "김치찌개", "순두부", "뼈해장국" ,"김치볶음밥"};
 
 	   for (int i = 0; i < randomMenu.length; i++) {
 
@@ -81,8 +81,6 @@
 
 	   randomMenus.remove(ran);
 	   
-	   // String keyword2 = get_Menu;
-	  // out.println(get_Menu);
 	// 디비 접속 해제
 	sqlSession.close();
 	
@@ -237,7 +235,7 @@
         // 검색어가 한글일 경우 GET파라미터에 포함시키기 위해서는 URLEncoding 처리가 필요하다.
        
         if (pageData.getPrevPage() > 0) {
-            String link1 = String.format("<a href='random_menu.jsp?page=%d&keyword2=%s'>[이전]</a>", 
+            String link1 = String.format("<a href='random_menu_Jpn.jsp?page=%d&keyword2=%s'>[이전]</a>", 
                     pageData.getPrevPage(),keyword2);
             out.println(link1);
         } else {
@@ -248,13 +246,13 @@
             if (i == nowPage) {
                 out.println("<strong>[" + i + "]</strong>");
             } else {
-                String link1 = String.format("<a href='random_menu.jsp?page=%d&keyword2=%s'>[%d]</a>", i,keyword2,i);
+                String link1 = String.format("<a href='random_menu.jsp_Jpn?page=%d&keyword2=%s'>[%d]</a>", i,keyword2,i);
                 out.println(link1);
             }
         }
 
         if (pageData.getNextPage() > 0) {
-            String link1 = String.format("<a href='random_menu.jsp?page=%d&keyword2=%s'>[다음]</a>",
+            String link1 = String.format("<a href='random_menu_Jpn.jsp?page=%d&keyword2=%s'>[다음]</a>",
             		pageData.getNextPage(),keyword2);
             out.println(link1);
         } else {
