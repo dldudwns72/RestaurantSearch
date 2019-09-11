@@ -18,12 +18,12 @@
 	Mybatis_RestaurantService RestaurantService = 
 			new Mybatis_RestaurantServiceImpl(sqlSession);
 	
-		String keyword_jpn = webHelper.getString("keyword_jpn","");
+		String keyword_chn = webHelper.getString("keyword_chn","");
 		
 		ArrayList<String> randomMenus = new ArrayList<String>();
 		
 		Restaurants.Items input = new Restaurants.Items();
-		input.setTitle(keyword_jpn);
+		input.setTitle(keyword_chn);
 		
 		// 빈즈를 담을 객체 생성
 		List<Restaurants.Items> output = null;
@@ -46,7 +46,7 @@
 		Restaurants.Items.setOffset(pageData.getOffset());
 		Restaurants.Items.setListCount(pageData.getListCount());
 		
-		output = RestaurantService.getRestaurantList_Kor(input); 
+		output = RestaurantService.getRestaurantList_Chn(input); 
 		
 	}catch(Exception e){
 		sqlSession.close();
@@ -54,7 +54,6 @@
 		return;
 	}
 	
-
 	   
 	// 디비 접속 해제
 	sqlSession.close();
@@ -124,7 +123,7 @@
 		 	<div class="col-md-4">
 
 				<div class="list-group">
-					<a href="cate-Korean.jsp" class="list-group-item">한식</a> 
+					<a href="cate-Chnean.jsp" class="list-group-item">한식</a> 
 					<a href="cate-China.jsp" class="list-group-item">중식</a>
 				    <a href="cate-Japan.jsp" class="list-group-item">일식</a> 
 				    <a href="cate-Wtf.jsp" class="list-group-item">양식</a>
@@ -138,7 +137,7 @@
 
 			<div class="col-lg-15">
 			
-				<h1 align="center">추천 일식 메뉴는 <%=keyword_jpn%> 입니다.</h1>
+				<h1 align="center">추천 중식 메뉴는 <%=keyword_chn%> 입니다.</h1>
 				
 				<div class="row">
 				
@@ -210,8 +209,8 @@
         // 검색어가 한글일 경우 GET파라미터에 포함시키기 위해서는 URLEncoding 처리가 필요하다.
        
         if (pageData.getPrevPage() > 0) {
-            String link1 = String.format("<a href='random_menu_Jpn.jsp?page=%d&keyword_jpn=%s'>[이전]</a>", 
-                    pageData.getPrevPage(),keyword_jpn);
+            String link1 = String.format("<a href='random_menu_Chn.jsp?page=%d&keyword_chn=%s'>[이전]</a>", 
+                    pageData.getPrevPage(),keyword_chn);
             out.println(link1);
         } else {
             out.println("[이전]");
@@ -221,14 +220,14 @@
             if (i == nowPage) {
                 out.println("<strong>[" + i + "]</strong>");
             } else {
-                String link1 = String.format("<a href='random_menu_Jpn.jsp?page=%d&keyword_jpn=%s'>[%d]</a>", i,keyword_jpn,i);
+                String link1 = String.format("<a href='random_menu_Chn.jsp?page=%d&keyword_chn=%s'>[%d]</a>", i,keyword_chn,i);
                 out.println(link1);
             }
         }
 
         if (pageData.getNextPage() > 0) {
-            String link1 = String.format("<a href='random_menu_Jpn.jsp?page=%d&keyword_jpn=%s'>[다음]</a>",
-            		pageData.getNextPage(),keyword_jpn);
+            String link1 = String.format("<a href='random_menu_Chn.jsp?page=%d&keyword_chn=%s'>[다음]</a>",
+            		pageData.getNextPage(),keyword_chn);
             out.println(link1);
         } else {
             out.println("[다음]");

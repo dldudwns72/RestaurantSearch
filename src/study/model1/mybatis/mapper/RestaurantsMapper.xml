@@ -60,7 +60,6 @@
         and title like concat('%',#{title},'%')
         </if> 
     <!--  <where>
-        	
         	 <if test="category != null and category != ''">
        		category like "%한식%"
         	 </if>  

@@ -154,6 +154,7 @@
 								for (Image_Search.Items item : list) {
 							%>
 							<img src="<%=item.thumbnail%>" width="260" height="145">
+							
 							<%
 								break;}
 							%>

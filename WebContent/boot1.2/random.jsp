@@ -39,7 +39,7 @@
 			return;
 		}
 		
-
+/* 
 		  //db에서 찾을 키워드 리스트 String 값으로 입력.
 		  
 		   String[] randomMenu = { "불고기", "된장찌개", "순두부", "뼈해장국" ,"김치볶음밥"};
@@ -59,9 +59,8 @@
 
 		   randomMenus.remove(ran);
 		   
-		   String keyword2 = get_Menu;
+		   String keyword2 = get_Menu; */
 
-		  // out.println(get_Menu);
 		// 디비 접속 해제
 		sqlSession.close();
 		
@@ -106,9 +105,22 @@
 					
 				</div>
 			</div>
-			<div class="col-md-4 mb-5">
+			
+			<%-- <div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<a href="random_menu.jsp?keyword2=<%=keyword2%>"><img class="card-img-top" src="img/cup.jpg" alt="" height=400></a>
+					<div class="card-body">
+						<input type ="hidden" name = "keyword2" value="<%=keyword2 %>">
+						<h4 class="card-title" align="center">랜덤 메뉴 추천!</h4>
+					</div>
+					
+					
+				</div>
+			</div> --%>
+			
+			<div class="col-md-4 mb-5">
+				<div class="card h-100">
+					<a href="random_menu_list.jsp"><img class="card-img-top" src="img/cup.jpg" alt="" height=400></a>
 					<div class="card-body">
 						<%-- <input type ="hidden" name = "keyword2" value="<%=keyword2 %>"> --%>
 						<h4 class="card-title" align="center">랜덤 메뉴 추천!</h4>
@@ -117,6 +129,7 @@
 					
 				</div>
 			</div>
+			
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<a href="data.jsp"><img class="card-img-top" src="img/cup.jpg" alt="" height=400>

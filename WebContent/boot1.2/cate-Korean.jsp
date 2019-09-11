@@ -203,7 +203,7 @@
 
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
-								<a href="place_info.jsp"> <img src="img/kit.jpg" width="222"
+								<a href="place_info.jsp?restNo=<%=restNo%>"> <img src="<%=item.getLink() %>" width="222"
 									height="128"></a>
 								<div class="card-body">
 									<h4 class="card-title">
